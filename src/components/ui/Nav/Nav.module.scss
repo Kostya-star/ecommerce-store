@@ -1,0 +1,14 @@
+.Nav {
+  display: flex;
+  justify-content: space-around;
+  background-color: black;
+}
+
+.link {
+  padding: 10px 10px;
+  color: white;
+  &.active {
+    background-color: white;
+    color: black;
+  }
+}
