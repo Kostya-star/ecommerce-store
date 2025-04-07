@@ -1,5 +1,5 @@
 // import type { Metadata } from "next";
-
+'use client'
 import Nav from '@/components/ui/Nav/Nav';
 
 // export const metadata: Metadata = {

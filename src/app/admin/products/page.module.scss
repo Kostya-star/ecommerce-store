@@ -1,0 +1,32 @@
+.pageHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tableContainer {
+  // max-width: 800px;
+  // margin: auto;
+  // width: 100%;
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  thead {
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  th {
+    text-align: left;
+    color: #757575;
+    font-weight: 600;
+    padding: 12px 16px;
+  }
+  
+  td {
+    padding: 12px 16px;
+    color: #333;
+  }
+}
+
