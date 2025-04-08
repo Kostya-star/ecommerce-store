@@ -11,8 +11,8 @@ import { useFormStatus } from 'react-dom';
 
 export function ProductForm() {
   const [priceInCents, setPriceInCents] = useState<number>(0);
-  const [formErrors, formAction] = useActionState(addNewProduct, {});
-  const { pending } = useFormStatus();
+  const [formState, formAction, pending] = useActionState(addNewProduct, {});
+  // const { pending } = useFormStatus();
 
   function onPriceInCents(e: ChangeEvent<HTMLInputElement>) {
     setPriceInCents(Number(e.target.value));
@@ -22,32 +22,32 @@ export function ProductForm() {
     <div className={cls.group}>
       <label htmlFor="name">Name</label>
       <Input id='name' name='name'/>
-      {formErrors?.name && <div className={cls.error}>{formErrors?.name}</div>}
+      {formState?.name && <div className={cls.error}>{formState?.name}</div>}
     </div>
 
     <div className={cls.group}>
       <label htmlFor="priceInCents">Price In Cents</label>
       <Input id='priceInCents' type='number' name='priceInCents' onChange={onPriceInCents}/>
       {formatCurrency((priceInCents || 0) / 100)}
-      {formErrors?.priceInCents && <div className={cls.error}>{formErrors?.priceInCents}</div>}
+      {formState?.priceInCents && <div className={cls.error}>{formState?.priceInCents}</div>}
     </div>
 
     <div className={cls.group}>
       <label htmlFor="description">Description</label>
       <textarea name='description'/>
-      {formErrors?.description && <div className={cls.error}>{formErrors?.description}</div>}
+      {formState?.description && <div className={cls.error}>{formState?.description}</div>}
     </div>
 
     <div className={cls.group}>
       <label htmlFor="file">File</label>
       <Input id='file' type='file' name='file'/>
-      {formErrors?.file && <div className={cls.error}>{formErrors?.file}</div>}
+      {formState?.file && <div className={cls.error}>{formState?.file}</div>}
     </div>
 
     <div className={cls.group}>
       <label htmlFor="image">Image</label>
       <Input id='image' type='file' name='image'/>
-      {formErrors?.image && <div className={cls.error}>{formErrors?.image}</div>}
+      {formState?.image && <div className={cls.error}>{formState?.image}</div>}
     </div>
 
     <Button type='submit' disabled={pending}>{pending ? 'Pending...' : 'Submit'}</Button>

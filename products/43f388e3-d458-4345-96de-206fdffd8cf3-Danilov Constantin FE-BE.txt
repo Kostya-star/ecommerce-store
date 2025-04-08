@@ -1,0 +1,72 @@
+Company Name: Zeno Academy
+
+Working period: December 2022 - October 2023
+
+Project: Teaching Platfrom
+
+Description: Zeno Academy - a platform that provides learning services about many school subjects.
+
+Languages/Technologies: HTML, CSS(SCSS), JavaScript, TypeScript, React, Redux, Webpack, Storybook, Git, GitHub, Eslint, Prettier. 
+Role: Front-End developer
+
+Responsibilities:
+As a single Front-End developer in the team, I had to create the project from scratch, working on different parts like Authentication Page, Main page, Schedule Page, Admin Page etc...
+No. of developers: 1(Front-End), 2(Back-End)
+
+--------------
+
+Company Name: Crawless
+
+Working period: August 2023 - current time
+
+Project: Directus
+
+Description: Directus - a platform or better say a kind of CMS system that allows users to connect any SQL database and manage its content through a user-friendly interface.
+
+Languages/Technologies: HTML, CSS(SCSS), JavaScript, TypeScript, Pinia, Vue(3), Vite, Storybook, Node.js, Postgresql, Git, GitLab, Jest, Lodash, Eslint, Prettier. 
+
+Role: Full-Stack developer with main focus on Front-End
+
+Responsibilities:
+As a Full-Stack developer mainly focusing on the FE part, I had to create new features, maintain the old ones and fix different bugs on FE as well as sometimes on BE. Often I was assigned to create different kind of extensions for Directus.
+
+No. of developers: 2(Front-End), 2(Back-End)
+
+Skills and Technologies
+
+Programming languages:
+HTML(advanced)
+CSS(advanced)
+Javascript(intermediate)
+Typescript(intermediate)
+
+Frameworks:
+Vue(advanced)
+Angular(beginner)
+
+Libraries:
+React(advanced)
+Redux\Redux-Toolkit(advanced)
+
+Field technologies:
+GIT(intermediate)
+Unit testing/End-to-end testing/RTL testing(intermediate)
+Cypress(beginner)
+Webpack(intermediate)
+Vite(intermediate)
+Storybook(intermediate)
+Node.js(intermediate)
+Express.js(intermediate)
+MongoDB(intermediate)
+PostgreSQL(intermediate)
+Github(advanced)
+GitLab(advanced)
+Bitbucket(intermediate)
+Eslint/custom eslint plugins(intermediate)
+Prettier(intermediate)
+FSD(intermediate)
+i18n(intermediate)
+husky(intermediate)
+axios(intermediate)
+loki(intermediate)
+AST tree(beginner)
