@@ -8,6 +8,7 @@ import ElipsisVertical from '@/app/svgs/ellipsis-vertical.svg'
 import Image from 'next/image';
 import { formatCurrency, formatNumber } from '@/util/formatter';
 import { DropdownMenu } from '@/components/ui/DropdownMenu/DropdownMenu';
+import { AvailableForPurchaseToggleDropdownItem, DeleteDropdownItem } from './_components/ProductActions/ProductActions';
 
 export default function AdmingProductsPage() {
   return <div>
@@ -63,14 +64,16 @@ async function Table() {
                 <td>
                   <DropdownMenu
                     trigger={
-                      <Image 
-                        src={ElipsisVertical} 
+                      <Image
+                        src={ElipsisVertical}
                         height={20} 
                         alt='Elipsis Vertical'
                       />}
                     >
-                    <div>Edit</div>
-                    <div>Delete</div>
+                    <a download href={`/admin/products/${p.id}/download`}>Download</a>
+                    <Link href={`/admin/products/${p.id}/edit`}>Edit</Link>
+                    <AvailableForPurchaseToggleDropdownItem id={p.id} isAvailableForPurchase={p.isAvailableForPurchase} />
+                    <DeleteDropdownItem id={p.id} isDisabled={p._count.orders > 0} />
                   </DropdownMenu>
                 </td>
               </tr>

@@ -3,8 +3,8 @@
 import { INewProduct } from '@/app/types/IProduct';
 import { db } from '@/db/db';
 import fs from 'fs/promises'
-import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
+// import { revalidatePath } from 'next/cache';
+import { notFound, redirect } from 'next/navigation';
 
 const formFields: (keyof INewProduct)[] = ['name', 'description', 'priceInCents', 'file', 'image']
 
@@ -39,23 +39,36 @@ export async function addNewProduct(prevState: unknown, formData: FormData): Pro
   // revalidatePath("/")
   // revalidatePath("/products")
   redirect('/admin/products')
+
+  function checkFormErrors(formObj: INewProduct) {
+    const errors: Partial<Record<keyof INewProduct, string>> = {}
+  
+  
+    for (const key of formFields) {
+      const fieldVal = formObj[key];
+      
+      
+      const isStringEmpty = typeof fieldVal === 'string' && !fieldVal.trim(); 
+      const isFile = typeof fieldVal !== 'string' && 'name' in fieldVal && 'size' in fieldVal
+      const isFileEmpty = isFile && !fieldVal.size; 
+  
+      if (isStringEmpty || isFileEmpty) errors[key] = `Field ${key} is required`;
+    }
+  
+  
+    return errors;
+  }
 }
 
-function checkFormErrors(formObj: INewProduct) {
-  const errors: Partial<Record<keyof INewProduct, string>> = {}
+export async function toggleProductAvailability(id: number, isAvailableForPurchase: boolean) {
+  await db.product.update({ where: { id }, data: { isAvailableForPurchase } })
+}
 
+export async function deleteProduct(id: number) {
+  const product = await db.product.delete({ where: { id } })
 
-  for (const key of formFields) {
-    const fieldVal = formObj[key];
-    
-    
-    const isStringEmpty = typeof fieldVal === 'string' && !fieldVal.trim(); 
-    const isFile = typeof fieldVal !== 'string' && 'name' in fieldVal && 'size' in fieldVal
-    const isFileEmpty = isFile && !fieldVal.size; 
+  if(!product) return notFound()
 
-    if (isStringEmpty || isFileEmpty) errors[key] = `Field ${key} is required`;
-  }
-
-
-  return errors;
+  fs.unlink(product.filePath)
+  fs.unlink(`public${product.imagePath}`)
 }

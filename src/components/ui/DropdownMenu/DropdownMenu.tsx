@@ -39,7 +39,8 @@ export function DropdownMenu({ trigger, children }: DropdownMenuProps) {
       {Children.map(children, (child) =>
         isValidElement(child)
           ? cloneElement(child, {
-            // @ts-ignore
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-expect-error
               onClick: () => setContentVisible(false),
             })
           : child

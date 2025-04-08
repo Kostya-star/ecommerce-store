@@ -13,3 +13,12 @@
     background-color: rgba(rgb(10, 9, 9), .8);
   }
 }
+
+.red {
+  background-color: tomato;
+  color: white;
+  font-weight: 600;
+  &:hover {
+    background-color: rgba(red, 10);
+  }
+}
