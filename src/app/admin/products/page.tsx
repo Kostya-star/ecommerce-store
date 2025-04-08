@@ -1,6 +1,13 @@
 import { Button } from '@/components/ui/Button/Button'
 import cls from './page.module.scss'
 import Link from 'next/link';
+import { db } from '@/db/db';
+import CircleCheck from '@/app/svgs/circle-check.svg'
+import CircleCross from '@/app/svgs/circle-cross.svg'
+import ElipsisVertical from '@/app/svgs/ellipsis-vertical.svg'
+import Image from 'next/image';
+import { formatCurrency, formatNumber } from '@/util/formatter';
+import { DropdownMenu } from '@/components/ui/DropdownMenu/DropdownMenu';
 
 export default function AdmingProductsPage() {
   return <div>
@@ -15,19 +22,60 @@ export default function AdmingProductsPage() {
   </div>
 }
 
-function Table() {
+async function Table() {
+  const products = await db.product.findMany({
+    select: {
+      id: true,
+      name: true,
+      priceInCents: true,
+      isAvailableForPurchase: true,
+      _count: { select: { orders: true } } 
+    }
+  })
+
+  if (!products.length) return <div className={cls.noProducts}>No products yet</div>
+
   return (
     <div className={cls.tableContainer}>
       <table>
         <thead>
           <tr>
+            <th></th>
             <th>Name</th>
             <th>Price</th>
             <th>Orders</th>
           </tr>
         </thead>
         <tbody>
-          {/* Table rows can go here */}
+          {
+            products.map(p => (
+              <tr key={p.id}>
+                <td>
+                  <Image 
+                    src={p.isAvailableForPurchase ? CircleCheck : CircleCross} 
+                    height={20} 
+                    alt='product availability'
+                  />
+                </td>
+                <td>{p.name}</td>
+                <td>{formatCurrency(p.priceInCents / 100)}</td>
+                <td>{formatNumber(p._count.orders)}</td>
+                <td>
+                  <DropdownMenu
+                    trigger={
+                      <Image 
+                        src={ElipsisVertical} 
+                        height={20} 
+                        alt='Elipsis Vertical'
+                      />}
+                    >
+                    <div>Edit</div>
+                    <div>Delete</div>
+                  </DropdownMenu>
+                </td>
+              </tr>
+            ))
+          }
         </tbody>
       </table>
     </div>
